@@ -4,21 +4,50 @@ USE project_fincorp_lending;
 #such as selecting all columns for all records, and specific columns like loan amount and type.
 
 SELECT * FROM loans;
-SELECT loan_id, loan_type, loan_amount, interest_rate, term_months FROM loans;
-SELECT customer_id, employment_status, annual_income, credit_score FROM loans WHERE region="West";
-SELECT customer_id, employment_status, annual_income, credit_score FROM loans WHERE (loan_amount="West" AND loan_type="Education");
+SELECT loan_id, loan_type, loan_amount, interest_rate, term_months 
+FROM loans;
+
+SELECT customer_id, employment_status, annual_income, credit_score 
+FROM loans WHERE region="West";
+
+SELECT customer_id, employment_status, annual_income, credit_score 
+FROM loans 
+WHERE (loan_amount="West" AND loan_type="Education");
 
 # Q2- Apply SQL commands to sort loans by issue date and filter loans by criteria such as loan type (e.g., Personal, Home)
-SELECT loan_id, issue_date FROM loans ORDER BY issue_date ASC;
-SELECT loan_id as "Top five loans", issue_date, loan_amount FROM loans WHERE (loan_type=("personal" AND "home")) ORDER BY issue_date ASC LIMIT 5;
+SELECT loan_id, issue_date 
+FROM loans 
+ORDER BY issue_date ASC;
+
+SELECT loan_id as "Top five loans", issue_date, loan_amount 
+FROM loans 
+WHERE (loan_type=("personal" AND "home")) 
+ORDER BY issue_date ASC LIMIT 5;
 
 # Q3- Use SQL to calculate aggregates like the total number of loans, average loan amount, and the maximum and minimum loan amounts.
-SELECT COUNT(loan_id) as "Total number of loans" FROM loans;
-SELECT AVG(loan_amount) FROM loans WHERE loan_amount> (1,00,000);
-SELECT AVG(loan_amount), loan_type FROM loans GROUP BY loan_type;
-SELECT AVG(loan_amount), loan_type FROM loans GROUP BY loan_type HAVING loan_type="Education";
-SELECT loan_id, loan_amount FROM loans ORDER BY loan_amount DESC;
-SELECT loan_id, loan_amount FROM loans ORDER BY loan_amount ASC;
+SELECT COUNT(loan_id) as "Total number of loans" 
+FROM loans;
+
+SELECT AVG(loan_amount) 
+FROM loans 
+WHERE loan_amount> (1,00,000);
+
+SELECT AVG(loan_amount), loan_type 
+FROM loans 
+GROUP BY loan_type;
+
+SELECT AVG(loan_amount), loan_type 
+FROM loans 
+GROUP BY loan_type 
+HAVING loan_type="Education";
+
+SELECT loan_id, loan_amount 
+FROM loans 
+ORDER BY loan_amount DESC;
+
+SELECT loan_id, loan_amount 
+FROM loans 
+ORDER BY loan_amount ASC;
 
 # Q4- Perform basic joins, for example, joining the loans table with a customers table 
 # (assuming such a table exists or is created for this task) on the customer ID to retrieve combined information.
@@ -47,10 +76,13 @@ FROM loans WHERE(region=("west" AND "east"));
 # Q6-  
 
 # A. Find the average loan amount, and average interest rate for each type of loan
-SELECT AVG(loan_amount, interest_rate), loan_type FROM loans GROUP BY loan_type;
+SELECT AVG(loan_amount, interest_rate), loan_type 
+FROM loans 
+GROUP BY loan_type;
 
 # B. Identify customers with loans in more than one category
-SELECT COUNT(customer_id), loan_type FROM loans 
+SELECT COUNT(customer_id), loan_type 
+FROM loans 
 WHERE (SELECT customer_id, loan_type FROM loans WHERE COUNT(DISTINCT(l.customer_id)>1))
 GROUP BY loan_type;
 
@@ -63,8 +95,10 @@ HAVING COUNT(DISTINCT loan_type) > 1;
 # Group data by various attributes such as loan type or region, and use the HAVING clause to filter groups based on aggregate conditions, 
 # like regions with average loan amounts above a certain threshold.
 
-SELECT AVG(loan_amount) AS "avg_loan_amount", loan_type, region FROM loans 
-GROUP BY loan_type, region HAVING (AVG(loan_amount)< 50,000);
+SELECT AVG(loan_amount) AS "avg_loan_amount", loan_type, region 
+FROM loans 
+GROUP BY loan_type, region 
+HAVING (AVG(loan_amount)< 50,000);
 
 # Question 8- 
 # Implement CASE statements in SQL to perform conditional logic, 
