@@ -120,4 +120,4 @@ SELECT customer_id, loan_id, employment_status, previous_loan_status,
          WHEN employment_status = "unemployed" AND previous_loan_status = "delaulted" THEN "high_risk"
 		 ELSE "further_risk_assessment_required" 
 	END AS "loan_risk_status"
-FROM loans;
+FROM loans; 
