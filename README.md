@@ -26,5 +26,5 @@ The primary objectives are to:
 
 #### Important Note for Project Reviewers:
 
-Sub-level business objectives and their corresponding queries have been documented within the query file, positioned directly above each relevant query for ease of reference. 
+Sub-level business objectives and their corresponding queries have been documented within the query file, positioned directly above each relevant query for ease of reference 
 
